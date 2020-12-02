@@ -130,7 +130,7 @@ ggplot( df , aes(x = stratio)) +
 # english
 ggplot( df , aes(x = english)) +
   geom_histogram(binwidth = 0.5,fill='navyblue') +
-  labs(x = "Ratio of english speakers (mother tounge)") 
+  labs(x = "Ratio of english learners (mother tounge)") 
 
 # Create a dummy variable from english learner:
 # 1 if ratio of english speakers is larger than 1%
@@ -199,9 +199,9 @@ numeric_df <- keep( df , is.numeric )
 cT <- cor(numeric_df , use = "complete.obs")
 
 # Check for highly correlated values:
-sum( cT >= 0.8 & cT != 1 ) / 2
+sum( abs(cT) >= 0.8 & cT != 1 ) / 2
 # Find the correlations which are higher than 0.8
-id_cr <- which( cT >= 0.8 & cT != 1 )
+id_cr <- which( abs(cT) >= 0.8 & cT != 1 )
 pair_names <- expand.grid( variable.names(numeric_df) , variable.names(numeric_df) )
 # Get the pairs:
 high_corr <- pair_names[ id_cr , ]
